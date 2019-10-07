@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics
-from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer,SignUpSerializer
+from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer
 from django.contrib.auth import get_user_model
 from .models import Question,Contest,Participant
 # Create your views here.
@@ -9,7 +9,7 @@ def IndexView(request):
     return HttpResponse("HeisenBerg.")
 
 class SignupAPIView(generics.CreateAPIView):
-    serializer_class=SignUpSerializer
+    serializer_class=UserSerializer
     def get_queryset(self):
         return get_user_model().objects.all()
 
