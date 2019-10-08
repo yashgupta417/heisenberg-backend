@@ -6,6 +6,7 @@ class User(AbstractUser):
     image=models.ImageField(upload_to="images/",blank=True,null=True)
     is_online=models.BooleanField(default=False)
     rating=models.IntegerField(default=1000)
+    max_rating=models.IntegerField(default=1000)
     def __str__(self):
         return self.username
 
@@ -14,6 +15,8 @@ class Question(models.Model):
     problem=models.TextField()
     answer=models.TextField()
     solution=models.TextField()
+    difficulty=models.CharField(default='A',max_length=10,blank=True)
+    points=models.IntegerField(default=1000)
     def __str__(self):
         return self.problem_name
 
@@ -25,7 +28,7 @@ class Contest(models.Model):
     date=models.DateField(blank=True,null=True)
     questions=models.ManyToManyField(Question)
     no_of_questions=models.IntegerField()
-
+    is_finished=models.BooleanField(default=False)
     def __str__(self):
         return self.name
 
