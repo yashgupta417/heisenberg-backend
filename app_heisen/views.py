@@ -46,7 +46,7 @@ class ContestListAPIView(generics.ListCreateAPIView):
     serializer_class=ContestSerializer
 
     def get_queryset(self):
-        q=self.query_params['q']
+        q=self.request.query_params['q']
         if q=='upcoming':
             return Contest.objects.filter(is_finished==0)
         elif q=='finished':
