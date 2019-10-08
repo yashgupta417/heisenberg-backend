@@ -48,9 +48,9 @@ class ContestListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         q=self.request.query_params.get('q','all')
         if q=='upcoming':
-            return Contest.objects.filter(is_finished==0)
+            return Contest.objects.filter(is_finished=False)
         elif q=='finished':
-            return Contest.objects.filter(is_finished==1)
+            return Contest.objects.filter(is_finished=True)
         return Contest.objects.all()
 
 class ContestDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
