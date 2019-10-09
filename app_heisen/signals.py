@@ -5,6 +5,7 @@ from django.conf import settings
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
+        #Don't forget to submit it in apps.py file
         if instance.is_superuser==False:
             instance.set_password(instance.password)
             instance.save()
