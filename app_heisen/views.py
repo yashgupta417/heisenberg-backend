@@ -16,6 +16,9 @@ class SignupAPIView(generics.CreateAPIView):
 class UserListAPIView(generics.ListAPIView):
     serializer_class=UserSerializer
     def get_queryset(self):
+        query=self.request.query_params.get('q',None)
+        if query!=None:
+            return get_user_model().objects.filter(Q(username__icontains=query)|Q(first_name__icontains=query))
         return get_user_model().objects.all()
 
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
