@@ -23,3 +23,8 @@ urlpatterns = [
     url(r'^$',views.IndexView,name="index"),
     url(r'^api/',include('app_heisen.urls'))
 ]
+
+from django.conf import settings
+from django.views.static import serve
+if settings.DEBUG:
+    urlpatterns+=[url(r'^media/(?P<path>.*)/$',serve,{'document_root':settings.MEDIA_ROOT})]
