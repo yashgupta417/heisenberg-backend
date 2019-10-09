@@ -4,6 +4,7 @@ from rest_framework import generics
 from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer
 from django.contrib.auth import get_user_model
 from .models import Question,Contest,Participant
+from django.db.models import Q
 # Create your views here.
 def IndexView(request):
     return HttpResponse("HeisenBerg.")
