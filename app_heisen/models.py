@@ -25,7 +25,8 @@ class Question(models.Model):
 #learn to schedule a task
 class Contest(models.Model):
     name=models.CharField(max_length=100,blank=False)
-    length=models.TimeField()
+    end_time=models.TimeField(null=True)
+    end_date=models.DateField(null=True)
     starting_time=models.TimeField(null=True)
     starting_date=models.DateField(null=True)
     questions=models.ManyToManyField(Question)
