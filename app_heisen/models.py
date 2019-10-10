@@ -17,6 +17,7 @@ class Question(models.Model):
     solution=models.TextField()
     difficulty=models.CharField(default='A',max_length=10,blank=True)
     points=models.IntegerField(default=1000)
+    is_available_for_practice=models.BooleanField(default=False)
     def __str__(self):
         return self.problem_name
 
@@ -24,8 +25,7 @@ class Question(models.Model):
 class Contest(models.Model):
     name=models.CharField(max_length=100,blank=False)
     length=models.TimeField()
-    starting_time=models.TimeField()
-    date=models.DateField(blank=True,null=True)
+    starting_time=models.DateTimeField(null=True)
     questions=models.ManyToManyField(Question)
     no_of_questions=models.IntegerField()
     is_finished=models.BooleanField(default=False)
