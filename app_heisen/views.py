@@ -87,5 +87,5 @@ class RegisterForContestAPIView(APIView):
          u_username=self.kwargs['user_username']
          contest=Contest.objects.get(id=c_id)
          user=get_user_model().objects.get(username=u_username)
-         p=Participant.objects.create(contest=contest,user=user)
+         p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
          return Response(p)
