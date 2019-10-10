@@ -66,16 +66,23 @@ class ContestDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self):
         return Contest.objects.get(id=self.kwargs['id'])
 
-class ContestStandingsAPIView(generics.ListCreateAPIView):
+class ContestParticipantsAPIView(generics.ListAPIView):
     serializer_class=ParticipantSerializer
 
     def get_queryset(self):
         contest_id=self.kwargs['contest_id']
         return Participant.objects.filter(contest=contest_id).order_by('score')
 
-class UserContestsAPIView(generics.ListAPIView):
+class UserAsParticipantsAPIView(generics.ListAPIView):
     serializer_class=ParticipantSerializer
 
     def get_queryset(self):
         username=self.kwargs['username']
         return Participant.objects.filter(user__username=username)
+
+from rest_framework.views import APIView
+class RegisterForContestAPIView(APIView):
+     def post(self,request,*args,**kwargs):
+         c_id=self.kwargs['contest_id']
+         u_id=self.kwargs['user_id']
+         p=Participant.objects.create(contest__id=c_id,user__id=u_id)
