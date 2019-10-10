@@ -82,10 +82,10 @@ class UserAsParticipantsAPIView(generics.ListAPIView):
 
 from rest_framework.views import APIView
 class RegisterForContestAPIView(APIView):
-     def post(self,request,*args,**kwargs):
-         c_id=self.kwargs['contest_id']
-         u_username=self.kwargs['user_username']
-         contest=Contest.objects.get(id=c_id)
-         user=get_user_model().objects.get(username=u_username)
-         p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
-         return Response({})
+    def post(self,request,*args,**kwargs):
+        c_id=self.kwargs['contest_id']
+        u_username=self.kwargs['user_username']
+        contest=Contest.objects.get(id=c_id)
+        user=get_user_model().objects.get(username=u_username)
+        p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
+        return Response({})
