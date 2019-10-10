@@ -26,7 +26,8 @@ class Question(models.Model):
 class Contest(models.Model):
     name=models.CharField(max_length=100,blank=False)
     length=models.TimeField()
-    starting_time=models.DateTimeField(null=True)
+    starting_time=models.TimeField(null=True)
+    starting_date=models.DateField(null=True)
     questions=models.ManyToManyField(Question)
     no_of_questions=models.IntegerField()
     is_finished=models.BooleanField(default=False)
