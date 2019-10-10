@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 class User(AbstractUser):
-    username=models.CharField(primary_key=True,max_length=255)
+    username=models.CharField(primary_key=True,max_length=255,blank=False,null=False)
     image=models.ImageField(upload_to="images/",blank=True,null=True)
     is_online=models.BooleanField(default=False)
     rating=models.IntegerField(default=1000)
