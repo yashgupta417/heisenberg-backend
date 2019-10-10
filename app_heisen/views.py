@@ -81,6 +81,7 @@ class UserAsParticipantsAPIView(generics.ListAPIView):
         return Participant.objects.filter(user__username=username)
 
 from rest_framework.views import APIView
+from rest_framework.response import Response
 class RegisterForContestAPIView(APIView):
     def post(self,request,*args,**kwargs):
         c_id=self.kwargs['contest_id']
@@ -88,4 +89,4 @@ class RegisterForContestAPIView(APIView):
         contest=Contest.objects.get(id=c_id)
         user=get_user_model().objects.get(username=u_username)
         p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
-        return JsonResponse({})
+        return Response({})
