@@ -10,6 +10,6 @@ urlpatterns=[url(r'^signup/$',views.SignupAPIView.as_view(),name='signup_api'),
             url(r'login/',v.obtain_auth_token),
             url(r'^contest_list/$',views.ContestListAPIView.as_view(),name='contest_list_api'),
             url(r'^contest_detail/(?P<id>\w+)/$',views.ContestDetailAPIView.as_view(),name='contest_detail_api',),
-            url(r'^contest/(?P<contest_id>\w+)/standings/$',views.ContestStandingsAPIView.as_view(),name='standings_api',),
-            url(r'^(?P<username>\w+)/contests$',views.UserContestsAPIView.as_view(),name='user_contests_api',),       
+            url(r'^contest/(?P<contest_id>\w+)/participants/$',views.ContestStandingsAPIView.as_view(),name='standings_api',),
+            url(r'^(?P<username>\w+)/contests$',views.UserContestsAPIView.as_view(),name='user_contests_api',),
             ]
