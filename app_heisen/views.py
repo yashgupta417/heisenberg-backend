@@ -84,5 +84,5 @@ from rest_framework.views import APIView
 class RegisterForContestAPIView(APIView):
      def post(self,request,*args,**kwargs):
          c_id=self.kwargs['contest_id']
-         u_id=self.kwargs['user_id']
-         p=Participant.objects.create(contest__id=c_id,user__id=u_id)
+         u_username=self.kwargs['user_username']
+         p=Participant.objects.create(contest__id=c_id,user__username=u_username)

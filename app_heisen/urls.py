@@ -12,5 +12,5 @@ urlpatterns=[url(r'^signup/$',views.SignupAPIView.as_view(),name='signup_api'),
             url(r'^contest_detail/(?P<id>\w+)/$',views.ContestDetailAPIView.as_view(),name='contest_detail_api',),
             url(r'^contest/(?P<contest_id>\w+)/participants/$',views.ContestParticipantsAPIView.as_view(),name='standings_api',),
             url(r'^(?P<username>\w+)/contests/$',views.UserAsParticipantsAPIView.as_view(),name='user_as_participants_api',),
-            url(r'^contest/(?P<contest_id>\w+)/(?P<user_id>\w+)/$',views.RegisterForContestAPIView.as_view(),name='register_api',),
+            url(r'^contest/(?P<contest_id>\w+)/(?P<user_username>\w+)/$',views.RegisterForContestAPIView.as_view(),name='register_api',),
             ]
