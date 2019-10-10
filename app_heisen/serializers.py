@@ -8,11 +8,15 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta():
         model=get_user_model()
         fields='__all__'
-
+class QuestionMiniSerializer(serializers.ModelSerializer):
+    class Meta():
+        model=Question
+        exclude=['solved_by']
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta():
         model=Question
         fields='__all__'
+        depth=1
 
 class ContestMiniSerializer(serializers.ModelSerializer):
     class Meta():
@@ -28,6 +32,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 class ContestSerializer(serializers.ModelSerializer):
     #participants=ParticipantSerializer(many=True,read_only=True)
+    questions=QuestionMiniSerializer(read_only=True)
     class Meta():
         model=Contest
         fields='__all__'

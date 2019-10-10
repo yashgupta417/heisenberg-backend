@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics
-from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer,ContestMiniSerializer
+from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer,ContestMiniSerializer,QuestionMiniSerializer
 from django.contrib.auth import get_user_model
 from .models import Question,Contest,Participant
 from django.db.models import Q
@@ -32,7 +32,7 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         return get_user_model().objects.get(username=self.kwargs['username'])
 
 class QuestionListAPIView(generics.ListCreateAPIView):
-    serializer_class=QuestionSerializer
+    serializer_class=QuestionMiniSerializer
 
     def get_queryset(self):
         return Question.objects.all()

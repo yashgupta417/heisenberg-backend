@@ -19,6 +19,8 @@ class Question(models.Model):
     difficulty=models.CharField(default='A',max_length=10,blank=True)
     points=models.IntegerField(default=1000)
     is_available_for_practice=models.BooleanField(default=False)
+    solved_by=models.ManyToManyField(settings.AUTH_USER_MODEL)
+    solved_by_count=models.IntegerField(default=0)
     def __str__(self):
         return self.problem_name
 
