@@ -14,7 +14,13 @@ class QuestionSerializer(serializers.ModelSerializer):
         model=Question
         fields='__all__'
 
+class ContestMiniSerializer(serializers.ModelSerializer):
+    class Meta():
+        model=Contest
+        exclude=['questions']
+
 class ParticipantSerializer(serializers.ModelSerializer):
+    contest=ContestMiniSerializer(read_only=True)
     class Meta():
         model=Participant
         fields='__all__'
@@ -22,7 +28,6 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 class ContestSerializer(serializers.ModelSerializer):
     #participants=ParticipantSerializer(many=True,read_only=True)
-
     class Meta():
         model=Contest
         fields='__all__'
