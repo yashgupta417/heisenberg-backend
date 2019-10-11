@@ -26,7 +26,8 @@ class ContestMiniSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 class ParticipantSerializer(serializers.ModelSerializer):
-    contest=ContestMiniSerializer(read_only=True)
+    #contest=ContestMiniSerializer(read_only=True)
+    #questions_solved=Question(many=True,read_only=True)
     class Meta():
         model=Participant
         fields='__all__'

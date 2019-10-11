@@ -20,7 +20,7 @@ class Question(models.Model):
     points=models.IntegerField(default=1000)
     is_available_for_practice=models.BooleanField(default=False)
     contest=models.ForeignKey('Contest',related_name='questions',on_delete=models.CASCADE,default=None,null=True)
-    solved_by=models.ManyToManyField('Participant',related_name='questions_solved')
+    solved_by=models.ManyToManyField('Participant',related_name='questions_solved',null=True,blank=True)
     solved_by_count=models.IntegerField(default=0)
     def __str__(self):
         return self.problem_name
@@ -46,5 +46,6 @@ class Participant(models.Model):
     score=models.IntegerField(default=0)
     rank=models.IntegerField(default=0)
     final_rating=models.IntegerField(default=0)
+    questions_solved_count=models.IntegerField(default=0)
     def __str__(self):
         return self.user.username
