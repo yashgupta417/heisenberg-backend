@@ -100,7 +100,7 @@ class SubmitAnswerAPIView(APIView):
             que=Question.objects.get(id=q_id)
             participant=Participant.objects.get(id=p_id)
             msg=''
-            if participant in que.solved_by.all():
+            if participant not in que.solved_by.all():
                 if que.answer==answer:
                     participant.score+=que.points
                     que.solved_by_count+=1
