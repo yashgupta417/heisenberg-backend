@@ -99,14 +99,19 @@ class SubmitAnswerAPIView(APIView):
         if answer!=None:
             que=Question.objects.get(id=q_id)
             participant=Participant.objects.get(id=p_id)
-            if True:
+            msg=''
+            if participant in que.solved_by.all():
                 if que.answer==answer:
                     participant.score+=que.points
                     que.solved_by_count+=1
                     que.solved_by.add(participant)
                     participant.save()
                     que.save()
+                    msg='Correct Answer'
                 else:
                     participant.score-=50
                     participant.save()
-        return Response({})
+                    msg='Wrong Answer'
+            else:
+                msg='Already Submitted Successfully'
+        return Response({'message':msg})
