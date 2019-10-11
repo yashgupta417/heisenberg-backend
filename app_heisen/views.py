@@ -97,13 +97,16 @@ class SubmitAnswerAPIView(APIView):
         p_id=self.kwargs['p_id']
         answer=self.request.query_params.get('answer',None)
         if answer!=None:
-            que=Question.objects.get(id=q_id)
-            participant=Participant.objects.get(id=p_id)
-            if participant in que.solved_by:
+            que=Question.objects.get(id=q_id).values()
+            participant=Participant.objects.get(id=p_id).values()
+            if True:
                 if que.answer==answer:
                     participant.score+=que.points
                     que.solved_by_count+=1
                     que.solved_by.add(participant)
+                    participant.save()
+                    que.save()
                 else:
                     participant.score-=50
+                    participant.save()
         return Response({})
