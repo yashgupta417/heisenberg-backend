@@ -90,3 +90,20 @@ class RegisterForContestAPIView(APIView):
         user=get_user_model().objects.get(username=u_username)
         p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
         return Response({})
+
+class SubmitAnswerAPIView(APIView):
+    def post(self,request,*args,**kwargs):
+        q_id=self.kwargs['q_id']
+        p_id=self.kwargs['p_id']
+        answer=self.request.query_params.get('answer',None)
+        if answer!=None:
+            que=Question.objects.get(id=q_id)
+            participant=Participant.objects.get(id=p_id)
+            if participant in que.solved_by:
+                if que.answer==answer:
+                    participant.score+=que.points
+                    que.solved_by_count+=1
+                    que.solved_by.add(participant)
+                else:
+                    participant.score-=50
+        return Response({})

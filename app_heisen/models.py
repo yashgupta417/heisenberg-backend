@@ -19,7 +19,8 @@ class Question(models.Model):
     difficulty=models.CharField(default='A',max_length=10,blank=True)
     points=models.IntegerField(default=1000)
     is_available_for_practice=models.BooleanField(default=False)
-    solved_by=models.ManyToManyField(settings.AUTH_USER_MODEL)
+    contest=models.ForeignKey('Contest',related_name='questions',on_delete=models.CASCADE,default=None,null=True)
+    solved_by=models.ManyToManyField('Participant',related_name='questions_solved')
     solved_by_count=models.IntegerField(default=0)
     def __str__(self):
         return self.problem_name
@@ -31,7 +32,7 @@ class Contest(models.Model):
     end_date=models.DateField(null=True)
     starting_time=models.TimeField(null=True)
     starting_date=models.DateField(null=True)
-    questions=models.ManyToManyField(Question)
+    #questions=models.ManyToManyField(Question)
     no_of_questions=models.IntegerField()
     is_finished=models.BooleanField(default=False)
     def __str__(self):

@@ -23,7 +23,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 class ContestMiniSerializer(serializers.ModelSerializer):
     class Meta():
         model=Contest
-        exclude=['questions']
+        fields='__all__'
 
 class ParticipantSerializer(serializers.ModelSerializer):
     contest=ContestMiniSerializer(read_only=True)
