@@ -103,6 +103,7 @@ class SubmitAnswerAPIView(APIView):
             if participant not in que.solved_by.all():
                 if que.answer==answer:
                     participant.score+=que.points
+                    participant.questions_solved_count+=1
                     que.solved_by_count+=1
                     que.solved_by.add(participant)
                     participant.save()
