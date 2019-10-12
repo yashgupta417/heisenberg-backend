@@ -95,7 +95,7 @@ class SubmitAnswerAPIView(APIView):
     def post(self,request,*args,**kwargs):
         q_id=self.kwargs['q_id']
         p_id=self.kwargs['p_id']
-        c_id=self.kwargs['c_id']
+        #c_id=self.kwargs['c_id']
         answer=self.request.query_params.get('answer',None)
         if answer!=None:
             que=Question.objects.get(id=q_id)
@@ -122,7 +122,7 @@ class SubmitAnswerAPIView(APIView):
                 #        p.rank=i
                 #        p.save()
                 #        i+=1
-                #    prev_score=p.score        
+                #    prev_score=p.score
             else:
                 msg='Already Submitted Successfully'
         return Response({'message':msg})
