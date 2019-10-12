@@ -35,7 +35,7 @@ class QuestionListAPIView(generics.ListCreateAPIView):
     serializer_class=QuestionMiniSerializer
 
     def get_queryset(self):
-        return Question.objects.all()
+        return Question.objects.filter(is_available_for_practice=True)
 
 class QuestionDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=QuestionSerializer
