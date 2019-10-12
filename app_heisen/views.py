@@ -89,7 +89,7 @@ class RegisterForContestAPIView(APIView):
         contest=Contest.objects.get(id=c_id)
         user=get_user_model().objects.get(username=u_username)
         p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
-        return Response({})
+        return Response(p)
 
 class SubmitAnswerAPIView(APIView):
     def post(self,request,*args,**kwargs):
