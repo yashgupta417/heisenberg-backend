@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics
-from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer,ContestMiniSerializer,QuestionMiniSerializer
+from .serializers import UserSerializer,QuestionSerializer,ContestSerializer,ParticipantSerializer,ContestMiniSerializer,QuestionMiniSerializer,UserMiniSerializer
 from django.contrib.auth import get_user_model
 from .models import Question,Contest,Participant
 from django.db.models import Q
@@ -15,7 +15,7 @@ class SignupAPIView(generics.CreateAPIView):
         return get_user_model().objects.all()
 
 class UserListAPIView(generics.ListAPIView):
-    serializer_class=UserSerializer
+    serializer_class=UserMiniSerializer
     def get_queryset(self):
         query=self.request.query_params.get('q',None)
         if query!=None:
@@ -71,7 +71,7 @@ class ContestParticipantsAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         contest_id=self.kwargs['contest_id']
-        return Participant.objects.filter(contest=contest_id).order_by('score')
+        return Participant.objects.filter(contest=contest_id).order_by('-score')
 
 class UserAsParticipantsAPIView(generics.ListAPIView):
     serializer_class=ParticipantSerializer

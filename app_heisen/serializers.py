@@ -3,8 +3,21 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
 
+class ParticipantSerializer(serializers.ModelSerializer):
+    #contest=ContestMiniSerializer(read_only=True)
+    #questions_solved=Question(many=True,read_only=True)
+    class Meta():
+        model=Participant
+        fields='__all__'
+        depth=1
 
 class UserSerializer(serializers.ModelSerializer):
+    as_participant=ParticipantSerializer(many=True,read_only=True)
+    class Meta():
+        model=get_user_model()
+        fields='__all__'
+
+class UserMiniSerializer(serializers.ModelSerializer):
     class Meta():
         model=get_user_model()
         fields='__all__'
@@ -25,13 +38,7 @@ class ContestMiniSerializer(serializers.ModelSerializer):
         model=Contest
         fields='__all__'
 
-class ParticipantSerializer(serializers.ModelSerializer):
-    #contest=ContestMiniSerializer(read_only=True)
-    #questions_solved=Question(many=True,read_only=True)
-    class Meta():
-        model=Participant
-        fields='__all__'
-        depth=1
+
 
 class ContestSerializer(serializers.ModelSerializer):
     #participants=ParticipantSerializer(many=True,read_only=True)
