@@ -11,8 +11,13 @@ class ParticipantSerializer(serializers.ModelSerializer):
         fields='__all__'
         depth=1
 
+class ParticipantMiniSerializer(serializers.ModelSerializer):
+    class Meta():
+        model=Participant
+        exclude=['user']
+        depth=1
 class UserSerializer(serializers.ModelSerializer):
-    as_participant=ParticipantSerializer(many=True,read_only=True)
+    as_participant=ParticipantMiniSerializer(many=True,read_only=True)
     class Meta():
         model=get_user_model()
         fields='__all__'
