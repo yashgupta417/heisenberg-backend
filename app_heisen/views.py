@@ -117,7 +117,7 @@ class SubmitAnswerAPIView(APIView):
                 all_p=Participant.objects.filter(contest__id=c_id).order_by('-score').values()
                 i=1
                 prev_score=10000000
-                for p in all_p:
+                for p in list(all_p):
                     if p.score<prev_score:
                         p.rank=i
                         p.save()
