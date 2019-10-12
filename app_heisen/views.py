@@ -89,6 +89,15 @@ class RegisterForContestAPIView(APIView):
         contest=Contest.objects.get(id=c_id)
         user=get_user_model().objects.get(username=u_username)
         p=Participant.objects.create(contest=contest,user=user,intital_rating=user.rating)
+        all_p=Participant.objects.filter(contest__id=c_id).order_by('-score')
+        i=1
+        prev_score=10000000
+        for p in all_p.iterator():
+            if p.score<prev_score:
+                p.rank=i
+                p.save()
+                i+=1
+            prev_score=p.score
         return Response({})
 
 class SubmitAnswerAPIView(APIView):
