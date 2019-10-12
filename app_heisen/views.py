@@ -114,7 +114,7 @@ class SubmitAnswerAPIView(APIView):
                     participant.score-=50
                     participant.save()
                     msg='Wrong Answer'
-                all_p=Participant.objects.filter(contest__id=c_id).order_by(-'score').values()
+                all_p=Participant.objects.filter(contest__id=c_id).order_by('-score').values()
                 i=1
                 prev_score=10000000
                 for p in all_p:
